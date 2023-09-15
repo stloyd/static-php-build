@@ -1,0 +1,15 @@
+{
+  "name": "stloyd/static-php-build",
+  "description": "",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "stloyd",
+      "email": "stloyd@gmail.com"
+    }
+  ],
+  "require": {
+    "crazywhalecc/static-php-cli": "dev-main"
+  }
+}
