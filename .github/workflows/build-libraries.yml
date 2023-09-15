@@ -1,4 +1,4 @@
-name: Build Release Artifacts
+name: Build Library Dependency Artifacts
 
 on:
     release:
@@ -8,7 +8,7 @@ on:
 
 jobs:
     build-release-artifacts:
-        name: "Build Release Artifacts"
+        name: "Build Library Dependency Artifacts"
         runs-on: ${{ matrix.operating-system }}
         strategy:
             fail-fast: false
@@ -19,45 +19,44 @@ jobs:
 #                    - "ubuntu-latest"
                     - "macos-latest"
                 extension:
-#                    - bcmath
-#                    - calendar
-#                    - ctype
+                    - brotli
+                    - bzip2
                     - curl
-#                    - dba
-#                    - dom
-#                    - exif
-#                    - filter
-#                    - fileinfo
-#                    - gd
-#                    - iconv
-#                    - intl
-#                    - mbstring
-#                    - mbregex
-#                    - mysqli
-#                    - mysqlnd
-#                    - opcache
+#                    - freetype
+#                    - glfw
+#                    - gmp
+#                    - icu
+#                    - imagemagick
+#                    - libavif
+#                    - libevent
+#                    - libffi
+#                    - libiconv
+#                    - libjpeg
+#                    - libmcrypt
+#                    - libmemcached
+#                    - libpng
+#                    - libsodium
+#                    - libssh2
+#                    - libwebp
+#                    - libxml2
+#                    - libxslt
+#                    - libyaml
+#                    - libzip
+#                    - mcrypt
+#                    - ncurses
+#                    - nghttp2
+#                    - onig
 #                    - openssl
-#                    - pcntl
-#                    - pdo
-#                    - pdo_mysql
-#                    - pdo_pgsql
-#                    - pdo_sqlite
-#                    - pgsql
-#                    - phar
-#                    - posix
+#                    # pkg-config
+#                    - postgresql
+#                    - pthreads4w
 #                    - readline
-#                    - redis
-#                    - session
-#                    - simplexml
-#                    - sockets
-#                    - sqlite3
-#                    - tokenizer
-#                    - xml
-#                    - xmlreader
-#                    - xmlwriter
-#                    - zip
+#                    - snappy
+#                    - sqlite
+#                    - xz
 #                    - zlib
-#                    - apcu
+#                    - zstd
+
         steps:
             - name: "Checkout"
               uses: "actions/checkout@v4"
@@ -112,7 +111,7 @@ jobs:
             - name: "Build phpmicro"
               run: |
                   SPC_USE_SUDO=yes bin/spc doctor --auto-fix
-                  bin/spc build ${{ matrix.extension }} --build-micro
+                  bin/spc build:libs
 
             - name: Upload binaries to release
               uses: softprops/action-gh-release@v1
@@ -125,7 +124,6 @@ jobs:
               with:
                 name: php-${{ matrix.php-version }}-${{ matrix.extension }}-${{ env.OS }}
                 path: |
-                  buildroot/bin/pkg-config
                   buildroot/include/
                   buildroot/lib/
                 if-no-files-found: error
