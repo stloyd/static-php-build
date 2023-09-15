@@ -19,8 +19,8 @@ jobs:
 #                    - "ubuntu-latest"
                     - "macos-latest"
                 library:
-                    - brotli
-                    - bzip2
+#                    - brotli
+#                    - bzip2
                     - curl
 #                    - freetype
 #                    - glfw
