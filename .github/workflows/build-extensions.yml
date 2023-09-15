@@ -123,10 +123,9 @@ jobs:
             - name: "Upload Artifact"
               uses: actions/upload-artifact@v3
               with:
-                name: php-${{ matrix.php-version }}-micro-${{ matrix.extension }}-${{ env.OS }}
+                name: php-${{ matrix.php-version }}-${{ matrix.extension }}-${{ env.OS }}
                 path: |
                   buildroot/include/
-                  buildroot/lib/*.a
-                  buildroot/lib/*.la
-                  buildroot/license/
+                  buildroot/lib/
+                  buildroot/build-*.json
                 if-no-files-found: error
