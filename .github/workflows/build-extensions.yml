@@ -19,10 +19,10 @@ jobs:
                     - "ubuntu-latest"
 #                    - "macos-latest"
                 extension:
-                    - bcmath
-                    - calendar
+#                    - bcmath
+#                    - calendar
 #                    - ctype
-#                    - curl
+                    - curl
 #                    - dba
 #                    - dom
 #                    - exif
