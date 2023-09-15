@@ -18,7 +18,7 @@ jobs:
                 operating-system:
 #                    - "ubuntu-latest"
                     - "macos-latest"
-                extension:
+                library:
                     - brotli
                     - bzip2
                     - curl
@@ -108,10 +108,10 @@ jobs:
               name: "Download sources"
               run: bin/spc download --with-php=${{ matrix.php-version }} --all
 
-            - name: "Build phpmicro"
+            - name: "Build libraries"
               run: |
                   SPC_USE_SUDO=yes bin/spc doctor --auto-fix
-                  bin/spc build:libs
+                  bin/spc build:libs ${{ matrix.library }}
 
             - name: Upload binaries to release
               uses: softprops/action-gh-release@v1
@@ -122,7 +122,7 @@ jobs:
             - name: "Upload Artifact"
               uses: actions/upload-artifact@v3
               with:
-                name: php-${{ matrix.php-version }}-${{ matrix.extension }}-${{ env.OS }}
+                name: php-${{ matrix.php-version }}-${{ matrix.library }}-${{ env.OS }}
                 path: |
                   buildroot/include/
                   buildroot/lib/
