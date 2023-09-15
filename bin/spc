@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+
+use SPC\ConsoleApplication;
+use SPC\exception\ExceptionHandler;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+try {
+    (new ConsoleApplication())->run();
+} catch (Exception $e) {
+    ExceptionHandler::getInstance()->handle($e);
+}

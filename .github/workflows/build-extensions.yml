@@ -107,12 +107,12 @@ jobs:
             # If there's no dependencies cache, fetch sources
             - if: steps.cache-download.outputs.cache-hit != 'true'
               name: "Download sources"
-              run: vendor/bin/spc download --with-php=${{ matrix.php-version }} --all
+              run: bin/spc download --with-php=${{ matrix.php-version }} --all
 
             - name: "Build phpmicro"
               run: |
-                  SPC_USE_SUDO=yes vendor/bin/spc doctor --auto-fix
-                  vendor/bin/spc build {{ matrix.extension }} --build-micro
+                  SPC_USE_SUDO=yes bin/spc doctor --auto-fix
+                  bin/spc build {{ matrix.extension }} --build-micro
 
             - name: Upload binaries to release
               uses: softprops/action-gh-release@v1
