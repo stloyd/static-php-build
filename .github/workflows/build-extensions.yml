@@ -16,8 +16,8 @@ jobs:
                 php-version:
                     - "8.1"
                 operating-system:
-                    - "ubuntu-latest"
-#                    - "macos-latest"
+#                    - "ubuntu-latest"
+                    - "macos-latest"
                 extension:
 #                    - bcmath
 #                    - calendar
