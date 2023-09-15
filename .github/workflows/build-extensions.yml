@@ -125,6 +125,8 @@ jobs:
               with:
                 name: php-${{ matrix.php-version }}-micro-${{ matrix.extension }}-${{ env.OS }}
                 path: |
+                  buildroot/include/
                   buildroot/lib/*.a
                   buildroot/lib/*.la
+                  buildroot/license/
                 if-no-files-found: error
