@@ -19,21 +19,22 @@ jobs:
                     - "ubuntu-latest"
                     - "macos-latest"
                 library:
+                    # Commented out libraries are not yet supported
                     - brotli
                     - bzip2
                     - curl
                     - freetype
-                    - glfw
+                    #- glfw
                     - gmp
                     - icu
                     - imagemagick
                     - libavif
                     - libevent
-                    - libffi
+                    #- libffi
                     - libiconv
                     - libjpeg
-                    - libmcrypt
-                    - libmemcached
+                    #- libmcrypt
+                    #- libmemcached
                     - libpng
                     - libsodium
                     - libssh2
@@ -47,9 +48,9 @@ jobs:
                     - nghttp2
                     - onig
                     - openssl
-                    # pkg-config
+                    #- pkg-config
                     - postgresql
-                    - pthreads4w
+                    #- pthreads4w
                     - readline
                     - snappy
                     - sqlite
@@ -108,7 +109,7 @@ jobs:
               name: "Download sources"
               run: bin/spc download --with-php=${{ matrix.php-version }} --all
 
-            - name: "Build libraries"
+            - name: "Build library: ${{ matrix.library }}"
               run: |
                   SPC_USE_SUDO=yes bin/spc doctor --auto-fix
                   bin/spc build:libs ${{ matrix.library }}
