@@ -17,7 +17,7 @@ jobs:
                     - "8.1"
                 operating-system:
                     - "ubuntu-latest"
-                    - "macos-latest"
+#                    - "macos-latest"
                 extension:
                     - bcmath
                     - calendar
@@ -102,7 +102,7 @@ jobs:
               uses: actions/cache@v3
               with:
                   path: downloads
-                  key: php-${{ matrix.php-version }}-${{ env.OS }}-dependencies
+                  key: php-${{ matrix.php-version }}-dependencies
 
             # If there's no dependencies cache, fetch sources
             - if: steps.cache-download.outputs.cache-hit != 'true'
@@ -112,7 +112,7 @@ jobs:
             - name: "Build phpmicro"
               run: |
                   SPC_USE_SUDO=yes bin/spc doctor --auto-fix
-                  bin/spc build {{ matrix.extension }} --build-micro
+                  bin/spc build ${{ matrix.extension }} --build-micro
 
             - name: Upload binaries to release
               uses: softprops/action-gh-release@v1
@@ -123,7 +123,7 @@ jobs:
             - name: "Upload Artifact"
               uses: actions/upload-artifact@v3
               with:
-                name: ${{ matrix.extension }}-${{ env.OS }}-micro
+                name: php-${{ matrix.php-version }}-micro-${{ matrix.extension }}-${{ env.OS }}
                 path: |
                   buildroot/lib/*.a
                   buildroot/lib/*.la
