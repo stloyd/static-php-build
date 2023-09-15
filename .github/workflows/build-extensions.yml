@@ -125,7 +125,7 @@ jobs:
               with:
                 name: php-${{ matrix.php-version }}-${{ matrix.extension }}-${{ env.OS }}
                 path: |
+                  buildroot/bin/pkg-config
                   buildroot/include/
                   buildroot/lib/
-                  buildroot/build-*.json
                 if-no-files-found: error
