@@ -87,11 +87,22 @@ jobs:
               run: "composer install --no-interaction --no-progress"
 
             # Cache downloaded source
+            - name: OS type
+              id: os-type
+              run: |
+                  OS=""
+                  if [ "${{ matrix.operating-system }}" = "ubuntu-latest" ]; then
+                      OS="linux-x86_64"
+                  elif [ "${{ matrix.operating-system }}" = "macos-latest" ]; then
+                      OS="macos-x86_64"
+                  fi
+                  echo "OS=$OS" >> $GITHUB_ENV
+
             - id: cache-download
               uses: actions/cache@v3
               with:
                   path: downloads
-                  key: php-${{ matrix.php-version }}-dependencies
+                  key: php-${{ matrix.php-version }}-${{ env.OS }}-dependencies
 
             # If there's no dependencies cache, fetch sources
             - if: steps.cache-download.outputs.cache-hit != 'true'
@@ -102,18 +113,6 @@ jobs:
               run: |
                   SPC_USE_SUDO=yes vendor/bin/spc doctor --auto-fix
                   vendor/bin/spc build {{ matrix.extension }} --build-micro
-
-            - name: "Archive Executable"
-              run: |
-                  OS=""
-                  if [ "${{ matrix.operating-system }}" = "ubuntu-latest" ]; then
-                      OS="linux-x86_64"
-                  elif [ "${{ matrix.operating-system }}" = "macos-latest" ]; then
-                      OS="macos-x86_64"
-                  fi
-                  tar -czf spc-$OS.tar.gz spc
-                  echo "filename=spc-$OS.tar.gz" >> $GITHUB_ENV
-                  echo "OS=$OS" >> $GITHUB_ENV
 
             - name: Upload binaries to release
               uses: softprops/action-gh-release@v1
