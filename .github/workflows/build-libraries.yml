@@ -20,43 +20,43 @@ jobs:
                     - "macos-latest"
                 library:
                     # Commented out libraries are not yet supported
-                    - brotli
-                    - bzip2
+#                    - brotli
+#                    - bzip2
                     - curl
-                    - freetype
+#                    - freetype
                     #- glfw
-                    - gmp
-                    - icu
+#                    - gmp
+#                    - icu
                     - imagemagick
-                    - libavif
-                    - libevent
-                    #- libffi
-                    - libiconv
-                    - libjpeg
-                    #- libmcrypt
-                    #- libmemcached
-                    - libpng
-                    - libsodium
-                    - libssh2
-                    - libwebp
-                    - libxml2
-                    - libxslt
-                    - libyaml
-                    - libzip
-                    - mcrypt
-                    - ncurses
-                    - nghttp2
-                    - onig
-                    - openssl
-                    #- pkg-config
-                    - postgresql
-                    #- pthreads4w
-                    - readline
-                    - snappy
-                    - sqlite
-                    - xz
-                    - zlib
-                    - zstd
+#                    - libavif
+#                    - libevent
+#                    #- libffi
+#                    - libiconv
+#                    - libjpeg
+#                    #- libmcrypt
+#                    #- libmemcached
+#                    - libpng
+#                    - libsodium
+#                    - libssh2
+#                    - libwebp
+#                    - libxml2
+#                    - libxslt
+#                    - libyaml
+#                    - libzip
+#                    - mcrypt
+#                    - ncurses
+#                    - nghttp2
+#                    - onig
+#                    - openssl
+#                    #- pkg-config
+#                    - postgresql
+#                    #- pthreads4w
+#                    - readline
+#                    - snappy
+#                    - sqlite
+#                    - xz
+#                    - zlib
+#                    - zstd
 
         steps:
             - name: "Checkout"
