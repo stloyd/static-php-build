@@ -62,14 +62,6 @@ jobs:
             - name: "Checkout"
               uses: "actions/checkout@v4"
 
-            - name: "Install PHP"
-              uses: "shivammathur/setup-php@v2"
-              with:
-                  coverage: none
-                  tools: none
-                  php-version: "${{ matrix.php-version }}"
-                  ini-values: memory_limit=-1
-
             - name: OS type
               id: os-type
               run: |
