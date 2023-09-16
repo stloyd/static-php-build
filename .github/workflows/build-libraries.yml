@@ -93,8 +93,8 @@ jobs:
                   fi
                   echo "OS=$OS" >> $GITHUB_ENV
 
-            - name: Download SPC bin artifact
-              id: download-spc-artifact
+            - name: Download source artifacts
+              id: download-source-artifact
               uses: dawidd6/action-download-artifact@v2
               with:
                   github_token: ${{secrets.GITHUB_TOKEN}}
