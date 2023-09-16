@@ -94,17 +94,18 @@ jobs:
             - name: Validate SPC bin
               run: |
                   chmod +x spc
-                  ./spc --help
+                  ./spc --version
 
-            - name: Download source artifacts
-              id: download-source-artifact
-              uses: dawidd6/action-download-artifact@v2
+            - id: cache-download
+              uses: actions/cache@v3
               with:
-                  github_token: ${{secrets.TOKEN}}
-                  repo: crazywhalecc/static-php-cli
-                  branch: main
-                  workflow: download-cache.yml
-                  path: "download/"
+                  path: downloads
+                  key: php-${{ matrix.php-version }}-dependencies
+
+            # If there's no dependencies cache, fetch sources
+            - if: steps.cache-download.outputs.cache-hit != 'true'
+              name: "Download sources"
+              run: ./spc download --with-php=${{ matrix.php-version }} --all
 
             - name: "Build library: ${{ matrix.library }}"
               run: |
