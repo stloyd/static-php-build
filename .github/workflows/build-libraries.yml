@@ -85,7 +85,8 @@ jobs:
               id: download-spc-artifact
               uses: dawidd6/action-download-artifact@v2
               with:
-                  github_token: ${{secrets.GITHUB_TOKEN}}
+                  github_token: ${{secrets.TOKEN}}
+                  repo: crazywhalecc/static-php-cli
                   branch: main
                   workflow: release-build.yml
                   name: "spc-${{ env.OS }}"
@@ -97,7 +98,8 @@ jobs:
               id: download-source-artifact
               uses: dawidd6/action-download-artifact@v2
               with:
-                  github_token: ${{secrets.GITHUB_TOKEN}}
+                  github_token: ${{secrets.TOKEN}}
+                  repo: crazywhalecc/static-php-cli
                   branch: main
                   workflow: download-cache.yml
                   path: "download/"
