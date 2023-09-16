@@ -92,7 +92,9 @@ jobs:
                   name: "spc-${{ env.OS }}"
 
             - name: Validate SPC bin
-              run: "./spc --help"
+              run: |
+                  chmod +x spc
+                  ./spc --help
 
             - name: Download source artifacts
               id: download-source-artifact
