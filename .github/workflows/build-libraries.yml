@@ -70,18 +70,6 @@ jobs:
                   php-version: "${{ matrix.php-version }}"
                   ini-values: memory_limit=-1
 
-            - name: Download SPC bin artifact
-              id: download-spc-artifact
-              uses: dawidd6/action-download-artifact@v2
-              with:
-                  github_token: ${{secrets.GITHUB_TOKEN}}
-                  branch: main
-                  workflow: release-build.yml
-
-            - name: Validate SPC bin
-              run: "./spc --help"
-
-            # Cache downloaded source
             - name: OS type
               id: os-type
               run: |
@@ -92,6 +80,18 @@ jobs:
                       OS="macos-x86_64"
                   fi
                   echo "OS=$OS" >> $GITHUB_ENV
+
+            - name: Download SPC bin artifact
+              id: download-spc-artifact
+              uses: dawidd6/action-download-artifact@v2
+              with:
+                  github_token: ${{secrets.GITHUB_TOKEN}}
+                  branch: main
+                  workflow: release-build.yml
+                  name: "spc-${{ env.OS }}"
+
+            - name: Validate SPC bin
+              run: "./spc --help"
 
             - name: Download source artifacts
               id: download-source-artifact
