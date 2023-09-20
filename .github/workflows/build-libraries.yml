@@ -17,17 +17,17 @@ jobs:
                     - "8.1"
                 operating-system:
                     - "ubuntu-latest"
-                    - "macos-latest"
+#                    - "macos-latest"
                 library:
                     # Commented out libraries are not yet supported
 #                    - brotli
 #                    - bzip2
-                    - curl
+#                    - curl
 #                    - freetype
                     #- glfw
 #                    - gmp
 #                    - icu
-                    - imagemagick
+#                    - imagemagick
 #                    - libavif
 #                    - libevent
 #                    #- libffi
@@ -52,7 +52,7 @@ jobs:
 #                    - postgresql
 #                    #- pthreads4w
 #                    - readline
-#                    - snappy
+                    - snappy
 #                    - sqlite
 #                    - xz
 #                    - zlib
@@ -102,7 +102,7 @@ jobs:
             - name: "Build library: ${{ matrix.library }}"
               run: |
                   SPC_USE_SUDO=yes ./spc doctor --auto-fix
-                  ./spc build:libs ${{ matrix.library }}
+                  ./spc build:libs ${{ matrix.library }} --debug
 
             - name: "Upload Artifact"
               uses: actions/upload-artifact@v3
